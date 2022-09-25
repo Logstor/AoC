@@ -1,0 +1,8 @@
+# Build output
+build
+
+# VSCode stuff
+.vscode
+
+# Big resource files
+res
