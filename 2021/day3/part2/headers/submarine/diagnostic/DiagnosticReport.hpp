@@ -26,7 +26,7 @@ struct BitSeq
 class DiagnosticReport
 {
     private:
-        struct StringPair
+        struct PowerPair
         {
             char gamma[33];
             char epsilon[33];
@@ -46,7 +46,7 @@ class DiagnosticReport
         inline bool IsAnalyzed() const { return this->Analyzed; }
 
     private:
-        StringPair* FindStringPair(const unsigned int bitLength);
+        PowerPair* FindPowerStringPair(const unsigned int bitLength);
 
     private:
         std::vector<BitSeq> InputBits;

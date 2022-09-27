@@ -4,10 +4,10 @@
 #include <string>
 #include <stdlib.h>
 
-DiagnosticReport::StringPair* DiagnosticReport::FindStringPair(const unsigned int bitLength)
+DiagnosticReport::PowerPair* DiagnosticReport::FindPowerStringPair(const unsigned int bitLength)
 {
     // Result string
-    StringPair* pair = (StringPair*) malloc(sizeof(StringPair));
+    PowerPair* pair = (PowerPair*) malloc(sizeof(PowerPair));
 
     // For every column
     unsigned int zero, one;
@@ -51,7 +51,7 @@ void DiagnosticReport::Analyze()
 {
     const unsigned int bitLength = this->InputBits[0].length;
 
-    StringPair* pair = FindStringPair(bitLength);
+    PowerPair* pair = FindPowerStringPair(bitLength);
 
     // Convert to ints
     char* end;
@@ -60,6 +60,8 @@ void DiagnosticReport::Analyze()
 
     // Clean up
     free(pair);
+
+    this->Analyzed = true;
 }
 
 uint32_t DiagnosticReport::CalcRes() const
