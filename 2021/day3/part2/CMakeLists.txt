@@ -10,7 +10,7 @@ configure_file(headers/Config.h.in ../headers/Config.h)
 
 # Compiler flags
 if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
-    set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -Werror -Wuninitialized -Weffc++")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -Werror -Wuninitialized -Weffc++ -O0")
 endif()
 
 # Source files

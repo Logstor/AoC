@@ -44,7 +44,8 @@ int main(int argc, char** argv)
     report.Analyze();
 
     // Print result
-    std::cout << "The total power consumption was: " << report.CalcRes() << std::endl;
+    std::cout << "The total power consumption was: " << report.CalcPowerConsumption() << std::endl;
+    std::cout << "The life support rating is: " << report.CalcLifeSupportRating() << std::endl;
 
     return 0;
 }
