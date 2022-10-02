@@ -8,8 +8,6 @@
 #include <array>
 
 #include "Config.h"
-#include "Submarine.hpp"
-#include "DiagnosticReport.hpp"
 
 int main(int argc, char** argv)
 {
@@ -24,27 +22,10 @@ int main(int argc, char** argv)
     // Open file
     FILE* file = fopen(inputFileName, "r");
 
-    // Read each line into vector
-    std::vector<BitSeq> bitRows; bitRows.reserve(1001);
-    char bitRow[33];
-    while (fscanf(file, "%s\n", bitRow) != EOF)
-    {
-        bitRows.emplace_back(bitRow);
-    }
-
-    std::cout << "Capacity: " << bitRows.capacity() << ", Size: " << bitRows.size() << std::endl;
-
     // Close file
     fclose(file);
 
-    // Create DiagnosticReport
-    DiagnosticReport report(bitRows);
-
-    // Analyze
-    report.Analyze();
-
     // Print result
-    std::cout << "The total power consumption was: " << report.CalcRes() << std::endl;
 
     return 0;
 }

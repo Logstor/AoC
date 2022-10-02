@@ -3,46 +3,66 @@
 #include <stdlib.h>
 
 Board::Board(const uint8_t* board, const unsigned int rows, const unsigned int cols)
-    : array2D(board), rows(rows), cols(cols) 
+    : rows(rows), cols(cols) 
 {
-    this->colResList = (unsigned int*) calloc(cols, sizeof(unsigned int));
-    this->rowResList = (unsigned int*) calloc(rows, sizeof(unsigned int));
 }
 
 Board::~Board() 
 { 
     delete[] this->array2D; 
-    delete[] this->colResList;
-    delete[] this->rowResList;
 }
 
 inline unsigned int Board::getRows() const { return this->rows; }
 inline unsigned int Board::getColumns() const { return this->cols; }
 
-inline uint8_t Board::get(const unsigned int row, const unsigned int col) const
+inline const Cell* Board::get(const unsigned int row, const unsigned int col) const
 {
-    return this->array2D[row * this->rows + col];
+    return &this->array2D[row * this->rows + col];
+}
+
+inline Cell* Board::getCell(const unsigned int row, const unsigned int col) const
+{
+    return &this->array2D[row * this->rows + col];
+}
+
+inline bool Board::checkCol(const unsigned int col) const
+{
+    register unsigned int row;
+    for (row = 0; row < this->rows; ++row)
+    {
+        if (!this->getCell(row, col)->marked)
+            return false;
+    }
+    return true;
+}
+
+inline bool Board::checkRow(const unsigned int row) const 
+{
+    register unsigned int col;
+    for (col = 0; col < this->cols; ++col)
+    {
+        if (!this->getCell(row, col)->marked)
+            return false;
+    }
+    return true;
 }
 
 bool Board::onDraw(const unsigned int num)
 {
     register unsigned int currCol, currRow;
+    Cell* currCell;
     for (currRow = 0; currRow < this->rows; ++currRow)
     {
         for (currCol = 0; currCol < this->cols; ++currCol)
         {
+            currCell = this->getCell(currRow, currCol);
+
             // Check if they're equal
-            if (this->get(currRow, currCol) == num)
+            if (currCell->value == num)
             {
-                // Increment res lists and check
-                ++this->colResList[currCol];
-                ++this->rowResList[currRow];
+                currCell->marked = true;
 
-                if( !(this->colResList[currCol] < this->cols) ||
-                    !(this->rowResList[currRow] < this->rows) )
-                    return true;
-
-                return false;
+                return this->checkCol(currCol) || this->checkRow(currRow);
             }
         }
     }
