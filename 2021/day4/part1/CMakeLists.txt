@@ -14,7 +14,7 @@ if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 # Source files
-target_sources(day4 PRIVATE src/Main.cpp src/submarine/Submarine.cpp src/submarine/diagnostic/DiagnosticReport.cpp)
+target_sources(day4 PRIVATE src/Main.cpp)
 
 # Include files
-target_include_directories(day4 PUBLIC headers headers/submarine headers/submarine/diagnostic)
+target_include_directories(day4 PUBLIC headers headers/bingo)
