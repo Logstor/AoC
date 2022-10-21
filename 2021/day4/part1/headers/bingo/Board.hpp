@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
 
 struct Cell
 {
@@ -14,17 +15,19 @@ class Board
         Board(const uint8_t* board, const unsigned int rows, const unsigned int cols);
         ~Board();
 
-        inline unsigned int getRows() const;
-        inline unsigned int getColumns() const;
+        inline unsigned int getRows() const { return this->rows; }
+        inline unsigned int getColumns() const { return this->cols; }
 
-        inline const Cell* get(const unsigned int row, const unsigned int col) const;
+        inline const Cell* get(const unsigned int row, const unsigned int col) const { return &this->array2D[row * this->rows + col]; }
+
+        std::string toString() const;
 
         bool onDraw(const unsigned int num);
 
     private:
-        inline Cell* getCell(const unsigned int row, const unsigned int col) const;
-        inline bool checkCol(const unsigned int col) const;
-        inline bool checkRow(const unsigned int row) const;
+        inline Cell getCell(const unsigned int row, const unsigned int col) const { return this->array2D[row * this->rows + col]; }
+        bool checkCol(const unsigned int col) const;
+        bool checkRow(const unsigned int row) const;
 
     private:
         unsigned int rows;

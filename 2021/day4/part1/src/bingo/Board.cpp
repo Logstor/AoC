@@ -1,10 +1,25 @@
 #include "Board.hpp"
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <string>
+#include <sstream>
+#include <iostream>
 
 Board::Board(const uint8_t* board, const unsigned int rows, const unsigned int cols)
     : rows(rows), cols(cols) 
 {
+    this->array2D = (Cell*) malloc(sizeof(Cell) * rows * cols);
+
+    // Fill Board
+    for (unsigned int row=0; row < rows; ++row)
+    {
+        for (unsigned int col=0; col < cols; ++col)
+        {
+            this->array2D[row * this->rows + col].marked = false;
+            this->array2D[row * this->rows + col].value = board[row * rows + col];
+        }
+    }
 }
 
 Board::~Board() 
@@ -12,45 +27,52 @@ Board::~Board()
     delete[] this->array2D; 
 }
 
-inline unsigned int Board::getRows() const { return this->rows; }
-inline unsigned int Board::getColumns() const { return this->cols; }
-
-inline const Cell* Board::get(const unsigned int row, const unsigned int col) const
+bool Board::checkCol(const unsigned int col) const
 {
-    return &this->array2D[row * this->rows + col];
-}
-
-inline Cell* Board::getCell(const unsigned int row, const unsigned int col) const
-{
-    return &this->array2D[row * this->rows + col];
-}
-
-inline bool Board::checkCol(const unsigned int col) const
-{
-    register unsigned int row;
+    unsigned int row;
     for (row = 0; row < this->rows; ++row)
     {
-        if (!this->getCell(row, col)->marked)
+        if (!this->getCell(row, col).marked)
             return false;
     }
     return true;
 }
 
-inline bool Board::checkRow(const unsigned int row) const 
+bool Board::checkRow(const unsigned int row) const 
 {
-    register unsigned int col;
+    unsigned int col;
     for (col = 0; col < this->cols; ++col)
     {
-        if (!this->getCell(row, col)->marked)
+        if (!this->getCell(row, col).marked)
             return false;
     }
     return true;
+}
+
+std::string Board::toString() const
+{
+    // Create buffer
+    std::stringstream ss;
+
+    ss << "--------------------" << std::endl;
+    for (unsigned int row=0; row < this->rows; ++row)
+    {
+        for (unsigned int col=0; col < this->cols; ++col)
+        {
+            ss << this->getCell(row, col).value << this->getCell(row, col).marked << " ";
+        }
+        ss << std::endl;
+    }
+    ss << "--------------------" << std::endl;
+
+    // Return as string
+    return ss.str();
 }
 
 bool Board::onDraw(const unsigned int num)
 {
-    register unsigned int currCol, currRow;
-    Cell* currCell;
+    unsigned int currCol, currRow;
+    Cell currCell;
     for (currRow = 0; currRow < this->rows; ++currRow)
     {
         for (currCol = 0; currCol < this->cols; ++currCol)
@@ -58,9 +80,9 @@ bool Board::onDraw(const unsigned int num)
             currCell = this->getCell(currRow, currCol);
 
             // Check if they're equal
-            if (currCell->value == num)
+            if (currCell.value == num)
             {
-                currCell->marked = true;
+                currCell.marked = true;
 
                 return this->checkCol(currCol) || this->checkRow(currRow);
             }
