@@ -59,7 +59,8 @@ std::string Board::toString() const
     {
         for (unsigned int col=0; col < this->cols; ++col)
         {
-            ss << this->getCell(row, col).value << this->getCell(row, col).marked << " ";
+            Cell currCell = this->getCell(row, col);
+            ss << std::to_string(currCell.value) << " " << std::to_string(currCell.marked) << ",\t";
         }
         ss << std::endl;
     }

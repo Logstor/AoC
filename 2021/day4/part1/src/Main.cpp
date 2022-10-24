@@ -30,7 +30,7 @@ int main(int argc, char** argv)
     }
 
     // Read draw sequence
-    std::vector<int> drawSeq;
+    std::vector<unsigned int> drawSeq;
     int currInt;
     while (input >> currInt)
     {
@@ -47,14 +47,12 @@ int main(int argc, char** argv)
         }
     }
 
-    for (int draw : drawSeq)
-        std::cout << draw << std::endl;
-
     // Read boards
     std::vector<Board*> boards;
     while (!input.eof())    // For every board
     {
         uint8_t numbers[5*5];
+        // uint8_t* numbers = (uint8_t*) malloc(sizeof(uint8_t) * 25);
         int row = 0;
         while (!input.eof()) // For every board row
         {
@@ -62,8 +60,8 @@ int main(int argc, char** argv)
             while(!input.eof()) // For every row int
             {
                 // Check for newline or space
-                const char currChar = input.peek();
-                if (currChar == '\n')
+                const uint8_t currChar = input.peek();
+                if (currChar == '\n' || currChar == '\r')
                 {
                     input.ignore();
                     if (row == 0 && col == 0) continue;
@@ -100,11 +98,15 @@ int main(int argc, char** argv)
         boards.push_back(b);
     };
 
-    // Print result
+    // Create bingo game
+    const BoardSize boardSize = {5, 5};
+    Bingo bingo(boardSize, drawSeq);
+
+    // Insert Boards
     for (Board* board : boards)
-    {
-        std::cout << board->toString() << std::endl;
-    }
+        bingo.addBoard(board);
+
+    //TODO: Play the game, and implemented calculating value for AoC
 
     return 0;
 }
