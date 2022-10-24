@@ -77,7 +77,7 @@ unsigned int Board::sumAllUnmarked() const
     {
         for (col = 0; col < this->cols; ++col)
         {
-            if (this->get(row, col)->marked)
+            if (!this->get(row, col)->marked)
                 sum += this->get(row, col)->value;
         }
     }

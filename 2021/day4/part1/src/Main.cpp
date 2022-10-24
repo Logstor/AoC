@@ -109,7 +109,7 @@ int main(int argc, char** argv)
     //TODO: Play the game, and implemented calculating value for AoC
     bingo.play();
 
-    std::cout << bingo.getWinner()->toString() << std::endl;
+    std::cout << bingo.getWinnerScore() << std::endl;
 
     return 0;
 }

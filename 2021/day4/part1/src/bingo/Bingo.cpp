@@ -25,11 +25,19 @@ void Bingo::addBoard(Board* board)
     this->boards.push_back(board);
 }
 
+unsigned int Bingo::getWinnerScore() const
+{
+    return this->winner->sumAllUnmarked() * this->latestDraw;
+}
+
 void Bingo::play()
 {
     // Go through every draw
     for (unsigned int draw : this->draws)
     {
+        // Update latest draw
+        this->latestDraw = draw;
+
         // Go through every board
         for (Board* board : this->boards)
         {
