@@ -22,6 +22,7 @@ class Board
 
         std::string toString() const;
 
+        unsigned int sumAllUnmarked() const;
         bool onDraw(const unsigned int num);
 
     private:

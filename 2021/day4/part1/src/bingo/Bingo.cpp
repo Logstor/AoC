@@ -13,8 +13,6 @@ Bingo::~Bingo()
 
 inline const std::vector<Board*> Bingo::getBoards() const { return this->boards; }
 
-inline const Board* Bingo::getWinner() const { return this->winner; }
-
 void Bingo::addBoard(Board* board)
 {
     // Make sure board is of correct size

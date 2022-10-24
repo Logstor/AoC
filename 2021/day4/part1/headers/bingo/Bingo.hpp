@@ -18,7 +18,8 @@ class Bingo
         ~Bingo();
 
         inline const std::vector<Board*> getBoards() const;
-        inline const Board* getWinner() const;
+        inline const Board* getWinner() const { return this->winner; }
+        const unsigned int getWinnerScore() const;
 
         void addBoard(Board* board);
         void play();

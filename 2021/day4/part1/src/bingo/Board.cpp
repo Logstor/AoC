@@ -70,6 +70,21 @@ std::string Board::toString() const
     return ss.str();
 }
 
+unsigned int Board::sumAllUnmarked() const
+{
+    unsigned int col, row, sum = 0;
+    for (row = 0; row < this->rows; ++row)
+    {
+        for (col = 0; col < this->cols; ++col)
+        {
+            if (this->get(row, col)->marked)
+                sum += this->get(row, col)->value;
+        }
+    }
+
+    return sum;
+}
+
 bool Board::onDraw(const unsigned int num)
 {
     unsigned int currCol, currRow;
