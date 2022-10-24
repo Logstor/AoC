@@ -73,17 +73,17 @@ std::string Board::toString() const
 bool Board::onDraw(const unsigned int num)
 {
     unsigned int currCol, currRow;
-    Cell currCell;
+    Cell* currCell;
     for (currRow = 0; currRow < this->rows; ++currRow)
     {
         for (currCol = 0; currCol < this->cols; ++currCol)
         {
-            currCell = this->getCell(currRow, currCol);
+            currCell = this->getCellP(currRow, currCol);
 
             // Check if they're equal
-            if (currCell.value == num)
+            if (currCell->value == num)
             {
-                currCell.marked = true;
+                currCell->marked = true;
 
                 return this->checkCol(currCol) || this->checkRow(currRow);
             }

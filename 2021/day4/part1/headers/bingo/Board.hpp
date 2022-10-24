@@ -26,6 +26,7 @@ class Board
 
     private:
         inline Cell getCell(const unsigned int row, const unsigned int col) const { return this->array2D[row * this->rows + col]; }
+        inline Cell* getCellP(const unsigned int row, const unsigned int col) const { return &this->array2D[row * this->rows + col]; }
         bool checkCol(const unsigned int col) const;
         bool checkRow(const unsigned int row) const;
 
