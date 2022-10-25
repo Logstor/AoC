@@ -17,6 +17,7 @@ class Board
 
         inline unsigned int getRows() const { return this->rows; }
         inline unsigned int getColumns() const { return this->cols; }
+        inline bool isWon() const { return this->m_isWon; }
 
         inline const Cell* get(const unsigned int row, const unsigned int col) const { return &this->array2D[row * this->rows + col]; }
 
@@ -32,6 +33,7 @@ class Board
         bool checkRow(const unsigned int row) const;
 
     private:
+        bool m_isWon = false;
         unsigned int rows;
         unsigned int cols;
         Cell* array2D;

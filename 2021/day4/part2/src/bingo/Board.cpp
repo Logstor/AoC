@@ -100,7 +100,8 @@ bool Board::onDraw(const unsigned int num)
             {
                 currCell->marked = true;
 
-                return this->checkCol(currCol) || this->checkRow(currRow);
+                this->m_isWon = this->checkCol(currCol) || this->checkRow(currRow);
+                return this->m_isWon;
             }
         }
     }

@@ -109,7 +109,8 @@ int main(int argc, char** argv)
     // Play the game
     bingo.play();
 
-    std::cout << bingo.getWinnerScore() << std::endl;
+    std::cout << "Winner Score: " << bingo.getWinnerScore() << std::endl;
+    std::cout << "Loser Score: " << bingo.getLoserScore() << std::endl;
 
     return 0;
 }
