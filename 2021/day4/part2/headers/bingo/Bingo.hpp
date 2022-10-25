@@ -5,6 +5,16 @@
 
 #include "Board.hpp"
 
+/// @brief Symbolizes a board win.
+struct Win
+{
+    /// @brief On what number the board won on.
+    const unsigned int winNumber;
+
+    /// @brief The board that won.
+    const Board* board;
+};
+
 struct BoardSize
 {
     uint16_t rows;
@@ -18,7 +28,7 @@ class Bingo
         ~Bingo();
 
         inline const std::vector<Board*> getBoards() const;
-        inline const Board* getWinner() const { return this->winner; }
+        inline const Board* getWinner() const { return this->winners[0].board; }
         unsigned int getWinnerScore() const;
 
         void addBoard(Board* board);
@@ -28,6 +38,5 @@ class Bingo
         const BoardSize boardSize;
         const std::vector<unsigned int> draws;
         std::vector<Board*> boards;
-        Board* winner = nullptr;
-        unsigned int latestDraw = -1;
+        std::vector<Win> winners;
 };

@@ -27,7 +27,8 @@ void Bingo::addBoard(Board* board)
 
 unsigned int Bingo::getWinnerScore() const
 {
-    return this->winner->sumAllUnmarked() * this->latestDraw;
+    // return this->winner->sumAllUnmarked() * this->latestDraw;
+    return this->winners[0].board->sumAllUnmarked() * this->winners[0].winNumber;
 }
 
 void Bingo::play()
@@ -35,15 +36,12 @@ void Bingo::play()
     // Go through every draw
     for (unsigned int draw : this->draws)
     {
-        // Update latest draw
-        this->latestDraw = draw;
-
         // Go through every board
         for (Board* board : this->boards)
         {
             if (board->onDraw(draw))
             {
-                this->winner = board;
+                this->winners.push_back({ draw, board });
                 return;
             }
         }

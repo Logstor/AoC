@@ -106,7 +106,7 @@ int main(int argc, char** argv)
     for (Board* board : boards)
         bingo.addBoard(board);
 
-    //TODO: Play the game, and implemented calculating value for AoC
+    // Play the game
     bingo.play();
 
     std::cout << bingo.getWinnerScore() << std::endl;
