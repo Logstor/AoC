@@ -1,0 +1,2 @@
+#define day5_VERSION_MAJOR @day5_VERSION_MAJOR@
+#define day5_VERSION_MINOR @day5_VERSION_MINOR@
