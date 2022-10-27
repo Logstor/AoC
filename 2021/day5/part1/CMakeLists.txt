@@ -14,7 +14,7 @@ if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 # Source files
-target_sources(day5 PRIVATE src/Main.cpp src/bingo/Board.cpp src/bingo/Bingo.cpp)
+target_sources(day5 PRIVATE src/Main.cpp)
 
 # Include files
-target_include_directories(day5 PUBLIC headers headers/bingo)
+target_include_directories(day5 PUBLIC headers)
