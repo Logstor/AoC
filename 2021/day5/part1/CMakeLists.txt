@@ -17,4 +17,4 @@ endif()
 target_sources(day5 PRIVATE src/Main.cpp)
 
 # Include files
-target_include_directories(day5 PUBLIC headers)
+target_include_directories(day5 PUBLIC headers headers/array)
