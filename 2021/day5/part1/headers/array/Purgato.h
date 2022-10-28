@@ -25,6 +25,7 @@ namespace Purgato
     {
         public:
             Array2D(const unsigned int rows, const unsigned int cols);
+            Array2D(const unsigned int rows, const unsigned int cols, const bool zeroInit);
             ~Array2D();
 
             /// @brief Retrieves copy of the actual value.
