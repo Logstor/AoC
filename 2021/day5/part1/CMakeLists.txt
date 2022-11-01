@@ -14,7 +14,7 @@ if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 # Source files
-target_sources(day5 PRIVATE src/Main.cpp src/array/Array.cpp src/array/Array2D.cpp)
+target_sources(day5 PRIVATE src/Main.cpp src/array/Array.cpp src/array/Array2D.cpp src/hydrothermal/VentMap.cpp)
 
 # Include files
-target_include_directories(day5 PUBLIC headers headers/array)
+target_include_directories(day5 PUBLIC headers headers/array headers/hydrothermal)
