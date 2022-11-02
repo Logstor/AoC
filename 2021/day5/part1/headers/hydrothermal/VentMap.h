@@ -12,7 +12,7 @@ class VentMap
         VentMap();
         ~VentMap();
 
-        void putCoordinateSet(CoordinateSet& set);
+        void putCoordinateSet(CoordinateSet* set);
         void putCoordinateSets(std::vector<CoordinateSet*>& sets);
         unsigned int overlappingPoints() const;
 

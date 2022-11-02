@@ -5,8 +5,8 @@ namespace Purgato
     /// @brief Base Purgato class.
     template<typename T> class Array
     {
-        private:
-            Array();
+        protected:
+            Array(const unsigned int length, T* data);
             ~Array();
 
         public:
