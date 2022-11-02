@@ -46,7 +46,7 @@ namespace Purgato
             /// @param value The value to be copied into the array.
             inline void set(const unsigned int row, const unsigned int col, const T &value) { this->data[row * this->rows + col] = value; }
 
-        private:
+        public:
             const unsigned int rows;
             const unsigned int cols;
     };

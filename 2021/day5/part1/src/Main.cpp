@@ -9,6 +9,7 @@
 
 #include "Config.h"
 #include "CoordinateSet.h"
+#include "VentMap.h"
 
 int main(int argc, char** argv)
 {
@@ -30,7 +31,7 @@ int main(int argc, char** argv)
 
     // Read all coordinate sets
     std::vector<CoordinateSet*> sets;
-    CoordinateSet* pSet; unsigned int count = 0;
+    CoordinateSet* pSet; unsigned int count = 0, xMax = 0, yMax = 0;
     char lineBuf[20];
     while (input.getline(lineBuf, 20))
     {
@@ -43,6 +44,11 @@ int main(int argc, char** argv)
             &pSet->x1, &pSet->y1, &pSet->x2, &pSet->y2
         );
 
+        if (pSet->x1 > xMax) xMax = pSet->x1;
+        if (pSet->x2 > xMax) xMax = pSet->x2;
+        if (pSet->y1 > yMax) yMax = pSet->y1;
+        if (pSet->y2 > yMax) yMax = pSet->y2;
+
         // Insert into vector
         sets.push_back(pSet);
 
@@ -50,11 +56,23 @@ int main(int argc, char** argv)
     }
 
     // Print what was read
-    std::cout << "Read " << count << " sets" << std::endl;
+    std::cout << "Read " << count << " sets | " << "xMax: " << xMax << ", yMax: " << yMax << std::endl;
+    count = 0;
     for (CoordinateSet* set : sets)
-        std::cout << "x1: " << set->x1 << ", y1: " << set->y1 <<  ", x2: " << set->x2 << ", y2: " << set->y2 << std::endl;
+    {
+        ++count;
+        std::cout << count << " | x1: " << set->x1 << ", y1: " << set->y1 <<  ", x2: " << set->x2 << ", y2: " << set->y2 << std::endl;
+    }
 
-    
+    // Put the coordinate sets in Map
+    VentMap hydrothermalMap(xMax + 1, yMax + 1);
+    hydrothermalMap.putCoordinateSets(sets);
+
+    // 
+    // std::cout << '\n' << hydrothermalMap.toString() << '\n' << std::endl;
+
+    // Print overlapping points
+    std::cout << "Overlapping points: " << hydrothermalMap.overlappingPoints() << std::endl;
 
     // Clean up
     for (CoordinateSet* set : sets) free(set);

@@ -21,4 +21,5 @@ namespace Purgato
     Array2D<T>::~Array2D() { free(this->data); }
 
     template class Array2D<u_int8_t>;
+    template class Array2D<u_int16_t>;
 };

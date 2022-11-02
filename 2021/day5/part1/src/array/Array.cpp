@@ -12,4 +12,5 @@ namespace Purgato
     Array<T>::~Array() {}
 
     template class Array<uint8_t>;
+    template class Array<uint16_t>;
 };
